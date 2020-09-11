@@ -1,8 +1,18 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './app/App';
+import axios from 'axios'
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
+
+import { router } from './_helpers';
 
 Vue.config.productionTip = false
 
+Vue.prototype.$http = axios
+
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+    el: '#app',
+    router: router,
+    render: h => h(App)
+});

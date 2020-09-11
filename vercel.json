@@ -1,0 +1,8 @@
+{
+    "name": "vue-auth-api",
+    "version": 2,
+    "env": {
+      "MONGODB_URI": "@my-mongodb-uri",
+      "JWT_PHRASE": "@my-jwt-phrase"
+    }
+  }

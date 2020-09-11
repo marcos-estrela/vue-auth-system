@@ -5,11 +5,21 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "serve:vercel": "vercel dev"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.2.4",
+    "axios": "^0.20.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "mongodb": "^3.6.0",
+    "njwt": "^1.0.0",
+    "vee-validate": "^3.3.9",
+    "vue": "^2.6.11",
+    "vue-common-pages": "^0.2.0",
+    "vue-router": "^3.4.3",
+    "vuelidate": "^0.7.5",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",

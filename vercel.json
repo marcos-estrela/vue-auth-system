@@ -3,6 +3,7 @@
     "version": 2,
     "env": {
       "MONGODB_URI": "@my-mongodb-uri",
-      "JWT_PHRASE": "@my-jwt-phrase"
+      "JWT_PHRASE": "@my-jwt-phrase",
+      "SENDGRID_API_KEY": "@my-sendgrid_api_key"
     }
   }

@@ -9,9 +9,10 @@
     "serve:vercel": "vercel dev"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.2.4",
+    "@sendgrid/mail": "^7.2.5",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "crypto": "^1.0.1",
     "mongodb": "^3.6.0",
     "njwt": "^1.0.0",
     "vee-validate": "^3.3.9",

@@ -104,13 +104,13 @@ export default {
       return "";
     },
     submit() {
-      // this.$v.$touch();
-      // if (this.$v.$invalid) {
-      //   this.submitStatus = "ERROR";
-      // } else {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitStatus = "ERROR";
+      } else {
         this.buttonLoader = true;
         this.$emit("submit", this.formData);
-      // }
+      }
     },
   },
 };

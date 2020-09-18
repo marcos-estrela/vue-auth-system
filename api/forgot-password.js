@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
       subject: "Sua requisição para mudança de senha do Monitora Sefaz",
       html: `<p>Olá,</p>
         <p>Alguém requisitou um link para mudar a sua senha. Você pode fazer isso clicando no link abaixo.</p>
-        <a href="http://localhost:3000/change-password?key=${changePasswordKey}&email=${req.body.email}" target="_blank">Mudar minha senha</a>
+        <a href="${req.get('origin')}/change-password?key=${changePasswordKey}&email=${req.body.email}" target="_blank">Mudar minha senha</a>
         <p>Se você não fez essa requisição, por favor ignore esse e-mail.</p>
         <p>Obrigado,<br>
         Equipe Monitora Sefaz</p>

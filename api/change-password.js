@@ -62,7 +62,10 @@ module.exports = async (req, res) => {
   );
 
   // Respond with a JSON string of all users in the collection
-  res
-    .status(200)
-    .json({ message: "Senha atualizada com sucesso.", type: "success" });
+  res.status(200).json({
+    success: {
+      code: 200,
+      message: "Senha atualizada com sucesso.",
+    },
+  });
 };

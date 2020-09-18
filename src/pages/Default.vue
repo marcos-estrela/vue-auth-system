@@ -61,7 +61,7 @@ export default {
           .catch((error) => {
             this.data.response = {
               type: "error",
-              message: error.response.data.message,
+              message: error.response.data[0].message,
             };
             this.formState = "hidden";
           });
@@ -73,7 +73,7 @@ export default {
     handleSubmit(data) {
       data = this.addParameters(data);
       const origin = window.location.origin;
-      console.warn(origin)
+      console.warn(origin);
       this.$http
         .post(`${origin}/${this._meta.apiURL}${this.data.apiPath}`, data)
         .then((response) => {
@@ -81,21 +81,19 @@ export default {
             if (this.successHandle.type === "redirect") {
               this.$router.push(this.successHandle.url);
             } else if (this.successHandle.type === "message") {
-              console.warn(response);
+              const type = Object.keys(response.data)[0];
               this.data.response = {
-                type: response.data.type,
-                message: response.data.message,
+                type: type,
+                message: response.data[type].message,
               };
             }
           }
         })
-        .catch((error) => {
-          this.data.response = {};
+        .catch(() => {
           this.data.response = {
             type: "error",
-            message: error.response.data.message,
+            message: "Ocorreu um erro no tratamento do retorno da chamada.",
           };
-          console.warn(this.data.response);
         });
     },
     addParameters(data) {

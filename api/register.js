@@ -29,7 +29,10 @@ module.exports = async (req, res) => {
   await collection.insertOne(
     {
       email: req.body.email,
-      password: req.body.password,
+      password: lib.crypto
+        .createHash("md5")
+        .update(req.body.password)
+        .digest("hex"),
       changePassword: {
         key: "",
       },
@@ -49,7 +52,7 @@ module.exports = async (req, res) => {
             subject: "Seja bem vindo ao Monitora Sefaz!",
             html: `<p>Olá,</p>
               <p>Você acaba de fazer o registro na plataforma do Monitora Sefaz. Para confirmar o seu e-mail, basta clicar no link abaixo.</p>
-              <a href="${req.headers.origin}/validate?key=${confirmKey}&user=${req.body.email}" target="_blank">Confirmar meu e-mail</a>
+              <a href="${req.headers.origin}/validate?key=${confirmKey}&email=${req.body.email}" target="_blank">Confirmar meu e-mail</a>
               <p>Se você não fez esse cadastro, por favor ignore esse e-mail.</p>
               <p>Obrigado,<br>
               Equipe Monitora Sefaz</p>
@@ -60,11 +63,12 @@ module.exports = async (req, res) => {
             .status(error.statusCode || 500)
             .json({ error: error.message });
         }
-
         res.status(200).json({
-          message:
-            "Usuário cadastrado com sucesso. Um e-mail de confirmação foi enviado para seu endereço de e-mail. Verifique seu e-mail, siga as instruções e confirme sua nova conta.",
-          type: "info",
+          info: {
+            code: 200,
+            message:
+              "Usuário cadastrado com sucesso. Um e-mail de confirmação foi enviado para seu endereço de e-mail. Verifique seu e-mail, siga as instruções e confirme sua nova conta.",
+          },
         });
       }
     }

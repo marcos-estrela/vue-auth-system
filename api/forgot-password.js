@@ -54,10 +54,11 @@ module.exports = async (req, res) => {
     return res.status(error.statusCode || 500).json({ error: error.message });
   }
 
-  // Respond with a JSON string of all users in the collection
   res.status(200).json({
-    message:
-      "E-mail enviado com sucesso. Verifique seu e-mail e siga as instruções para trocar a sua senha.",
-    type: "info",
+    info: {
+      code: 200,
+      message:
+        "E-mail enviado com sucesso. Verifique seu e-mail e siga as instruções para trocar a sua senha.",
+    },
   });
 };

@@ -34,9 +34,11 @@ module.exports = async (req, res) => {
       if (error) res.status(400).json({ error });
       else {
         res.status(200).json({
-          message:
-            "Obrigado por validar o seu e-mail. Agora você já pode utilizar o nosso sistema.",
-          type: "success",
+          success: {
+            code: 200,
+            message:
+              "Obrigado por validar o seu e-mail. Agora você já pode utilizar o nosso sistema.",
+          },
         });
       }
     }

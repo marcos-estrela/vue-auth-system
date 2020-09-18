@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
             subject: "Seja bem vindo ao Monitora Sefaz!",
             html: `<p>Olá,</p>
               <p>Você acaba de fazer o registro na plataforma do Monitora Sefaz. Para confirmar o seu e-mail, basta clicar no link abaixo.</p>
-              <a href="${req.get('origin')}/validate?key=${confirmKey}&user=${req.body.email}" target="_blank">Confirmar meu e-mail</a>
+              <a href="${req.headers.origin}/validate?key=${confirmKey}&user=${req.body.email}" target="_blank">Confirmar meu e-mail</a>
               <p>Se você não fez esse cadastro, por favor ignore esse e-mail.</p>
               <p>Obrigado,<br>
               Equipe Monitora Sefaz</p>

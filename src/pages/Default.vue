@@ -51,8 +51,9 @@ export default {
           message: "Usuário não encontrado no link.",
         };
       } else {
+        const origin = window.location.origin;
         this.$http
-          .post(`${this._meta.apiURL}${this.data.validationPath}`, {
+          .post(`${origin}/${this._meta.apiURL}${this.data.validationPath}`, {
             key: key,
             email: email,
           })
@@ -71,8 +72,10 @@ export default {
   methods: {
     handleSubmit(data) {
       data = this.addParameters(data);
+      const origin = window.location.origin;
+      console.warn(origin)
       this.$http
-        .post(`${this._meta.apiURL}${this.data.apiPath}`, data)
+        .post(`${origin}/${this._meta.apiURL}${this.data.apiPath}`, data)
         .then((response) => {
           if (this.successHandle) {
             if (this.successHandle.type === "redirect") {

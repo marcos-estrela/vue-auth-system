@@ -13,14 +13,19 @@ module.exports = async (req, res) => {
 
   if (!user) {
     res.status(400).json({
-      message: "Esse usuário não existe em nossa base de dados.",
+      error: {
+        code: 400,
+        message: "Esse usuário não existe em nossa base de dados.",
+      },
     });
     return;
   }
-
   if (user.changePassword.key !== req.body.key) {
     res.status(400).json({
-      message: "Esse código para mudança de senha não é válido.",
+      error: {
+        code: 400,
+        message: "Esse código para mudança de senha não é mais válido. Peça um novo e-mail para mudança de senha.",
+      },
     });
     return;
   }
@@ -33,9 +38,15 @@ module.exports = async (req, res) => {
       },
     },
     (error) => {
-      if (error) res.status(400).json({ error });
+      if (error)
+        res.status(400).json({
+          error: {
+            code: 400,
+            message: error,
+          },
+        });
       else {
-        res.status(200).json({ message: "Dados válidos" });
+        res.status(200).json(true);
       }
     }
   );

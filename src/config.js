@@ -2,7 +2,7 @@ import { email, required, minLength, sameAs } from "vuelidate/lib/validators";
 
 const data = {
   _meta: {
-    color: "#8B0000",
+    color: "#1F618D",
     apiURL: "api",
     catchMessage:
       "Ocorreu um problema na requisição. Tente novamente mais tarde.",

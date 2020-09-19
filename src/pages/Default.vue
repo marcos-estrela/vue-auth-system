@@ -45,11 +45,13 @@ export default {
           type: "error",
           message: "Chave não encontrada no link.",
         };
+        this.formState = "visible";
       } else if (!email) {
         this.data.response = {
           type: "error",
           message: "Usuário não encontrado no link.",
         };
+        this.formState = "visible";
       } else {
         const origin = window.location.origin;
         this.$http
@@ -57,11 +59,21 @@ export default {
             key: key,
             email: email,
           })
-          .then(() => (this.formState = "visible"))
+          .then((response) => {
+            this.formState = "visible";
+            const type = Object.keys(response.data)[0];
+            if (type) {
+              this.data.response = {
+                type: type,
+                message: response.data[type].message,
+              };
+            }
+          })
           .catch((error) => {
+            const type = Object.keys(error.response.data)[0];
             this.data.response = {
-              type: "error",
-              message: error.response.data[0].message,
+              type: type,
+              message: error.response.data[type].message,
             };
             this.formState = "hidden";
           });
@@ -73,7 +85,6 @@ export default {
     handleSubmit(data) {
       data = this.addParameters(data);
       const origin = window.location.origin;
-      console.warn(origin);
       this.$http
         .post(`${origin}/${this._meta.apiURL}${this.data.apiPath}`, data)
         .then((response) => {
@@ -89,10 +100,19 @@ export default {
             }
           }
         })
-        .catch(() => {
+        .catch((error) => {
+          var type;
+          var message;
+          if (error.response) {
+            type = Object.keys(error.response.data)[0];
+            message = error.response.data[type].message;
+          } else {
+            type = "error";
+            message = "Ocorreu um erro no tratamento do retorno da chamada";
+          }
           this.data.response = {
-            type: "error",
-            message: "Ocorreu um erro no tratamento do retorno da chamada.",
+            type: type,
+            message: message,
           };
         });
     },

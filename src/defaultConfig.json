@@ -79,6 +79,13 @@
           "type": "email",
           "placeholder": "E-mail"
         }
+      ],
+      "links": [
+        {
+          "id": "alreadyCustomer",
+          "text": "Ir para a página de login",
+          "url": "/login"
+        }
       ]
     }
   },
@@ -100,6 +107,13 @@
           "type": "password",
           "placeholder": "Senha novamente"
         }
+      ],
+      "links": [
+        {
+          "id": "alreadyCustomer",
+          "text": "Ir para a página de login",
+          "url": "/login"
+        }
       ]
     }
   },
@@ -112,8 +126,9 @@
       },
       "links": [
         {
-          "text": "Retornar para a página inicial",
-          "url": "#"
+          "id": "alreadyCustomer",
+          "text": "Ir para a página de login",
+          "url": "/login"
         }
       ]
     }

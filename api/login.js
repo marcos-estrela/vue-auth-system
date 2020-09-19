@@ -4,16 +4,33 @@ import jwt from "njwt";
 module.exports = async (req, res) => {
   // Get a database connection, cached or otherwise,
   // using the connection string environment variable as the argument
-  const db = await lib.connectToDatabase(process.env.MONGODB_URI);
+  const db = await lib.connectToDatabase(process.env.MONGODB_URI, res);
+
+  if (!db) {
+    lib.httpResponse({
+      response: res,
+      type: "error",
+      code: 400,
+      message: "Não foi posssível se conectar ao banco de dados",
+    });
+  }
 
   if (!req.body.email) {
-    res.status(400).json({ message: "E-mail é um campo obrigatório." });
-    return;
+    lib.httpResponse({
+      response: res,
+      type: "error",
+      code: 400,
+      message: "E-mail é um campo obrigatório.",
+    });
   }
 
   if (!req.body.password) {
-    res.status(400).json({ message: "Senha é um campo obrigatório." });
-    return;
+    lib.httpResponse({
+      response: res,
+      type: "error",
+      code: 400,
+      message: "Senha é um campo obrigatório.",
+    });
   }
 
   // Select the "users" collection from the database
@@ -31,10 +48,12 @@ module.exports = async (req, res) => {
   });
 
   if (!user) {
-    res.status(400).json({
+    lib.httpResponse({
+      response: res,
+      type: "error",
+      code: 400,
       message: "Usuário ou senha não correspondem a um usuário válido.",
     });
-    return;
   }
 
   const payload = { email: req.body.email };

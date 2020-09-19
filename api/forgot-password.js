@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const db = await lib.connectToDatabase(process.env.MONGODB_URI);
+  const db = await lib.connectToDatabase(process.env.MONGODB_URI, res);
 
   // Select the "users" collection from the database
   const collection = await db.collection("users");

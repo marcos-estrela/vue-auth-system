@@ -2,15 +2,21 @@ const lib = require("./common-lib");
 
 module.exports = async (req, res) => {
   if (!req.body.email) {
-    res
-      .status(404)
-      .json({ message: "Não foi possível identificar o usuário." });
+    res.status(404).json({
+      error: {
+        code: 404,
+        message: "Não foi possível identificar o usuário.",
+      },
+    });
     return;
   }
 
   if (!req.body.key) {
     res.status(404).json({
-      message: "Não foi possível identificar a chave para mudança de senha.",
+      error: {
+        code: 404,
+        message: "Não foi possível identificar a chave para mudança de senha.",
+      },
     });
     return;
   }
@@ -30,7 +36,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const db = await lib.connectToDatabase(process.env.MONGODB_URI);
+  const db = await lib.connectToDatabase(process.env.MONGODB_URI, res);
   const collection = await db.collection("users");
 
   const user = await collection.findOne({ email: req.body.email });

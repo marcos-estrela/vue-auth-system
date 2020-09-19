@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const db = await lib.connectToDatabase(process.env.MONGODB_URI);
+  const db = await lib.connectToDatabase(process.env.MONGODB_URI, res);
   const collection = await db.collection("users");
 
   // Check if the username does not exists in the collection

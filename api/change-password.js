@@ -43,7 +43,8 @@ module.exports = async (req, res) => {
 
   if (user.changePassword.key !== req.body.key) {
     res.status(400).json({
-      message: "Esse código para mudança de senha não é mais válido.",
+      message:
+        "Esse código para mudança de senha não é mais válido. Peça um novo e-mail para mudança de senha.",
     });
     return;
   }
